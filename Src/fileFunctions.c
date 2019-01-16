@@ -11,7 +11,7 @@ Procedimiento: Realiza la asignación de los datos para cada uno de los valores 
 Salida: Entrega la lista con los datos leidos desde el archivo de texto.
 */
 
-List* loadListNodo (char nombre[])
+Matriz* loadMatriz (char nombre[])
 {
 	FILE *file; // Declaramos un puntero File para poder leer el file de entrada.
 	char* route = (char*)calloc(100, sizeof(char));
@@ -20,9 +20,9 @@ List* loadListNodo (char nombre[])
     strcat(route, ".in");
     file = fopen (route, "r"); // Estamos abriendo el file en modo lectura
 
-    List* listNodo = (List*)malloc(sizeof(List));; // Se declara una variable de tipo matriz
-    int numberCollectionCenter,numberCollectionAvailable, distanceOrigin, counter = 0; 
-    float weigth,govermentMoney;
+    Matriz* list = (Matriz*)malloc(sizeof(Matriz));; // Se declara una variable de tipo matriz
+    int numberCol,numberRow,i,j; 
+    char element;
     //Verificamos si el file se encuentra nulo
     if( file == NULL)
     {
@@ -31,25 +31,34 @@ List* loadListNodo (char nombre[])
     }
 
     // Leemos las primeras lineas del file para un mejor manejo de este
-    fscanf(file, "%d %d %f", &numberCollectionCenter, &numberCollectionAvailable, &govermentMoney );
+    fscanf(file, "%d %d", &numberRow, &numberCol );
 
-    //printf("%d %d %d \n", numberCollectionCenter, numberCollectionAvailable, govermentMoney);
+    //printf("%d %d ", numberCol, numberRow);
 
-    listNodo = createListNodo(numberCollectionCenter,numberCollectionAvailable,govermentMoney,listNodo);
+    list = createListMatriz(list, numberRow,numberCol);
+
+    //printf("Sali");
 
     while(getc(file) != '\n'); // Que lea el file siempre y cuando no sea un salto de linea
     while (!feof(file)) 
     {
         //printf("ENtre");
-        fscanf(file, "%d %f",&distanceOrigin, &weigth);
-        listNodo->nodo[counter].distanceOrigin = distanceOrigin;
-        listNodo->nodo[counter].weigth = weigth;
-        //printf("%d %f \n" , distanceOrigin,weigth);
-        counter++;
+
+        for (i = 0 ; i < numberRow; i++)
+        {
+            for(j = 0 ; j < numberCol; j++)
+            {          
+                fscanf(file, "%c ", &element);
+                list->matriz[i][j].element = element;
+                //list->matrizInv[][].element = element;
+                list->matriz[i][j].put = 0;
+                //printf("%c" , list->matriz[i][j].element);
+            }
+        }
     }
     
     fclose(file); // Cerramos el file
  
-    return listNodo; //Retornamo la variable matriz, con el tablero contenido, el cual se leyó desde el file ingresado
+    return list; //Retornamo la variable matriz, con el tablero contenido, el cual se leyó desde el file ingresado
 
 }

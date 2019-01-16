@@ -42,7 +42,48 @@ Procedimiento: Imprime cada una de los valores del nodo.
 Salida: - 
 */
 
-void printListNodo ()
+void printListMatriz (Matriz* list, int aux)
 {
+    printf("\n");
+    printf("\n");
+    printf("************** Mostrando matriz *****************");
+    printf("\n");
+    printf("\n");
 
+    int i,j;
+    for(i = 0 ; i < list->row ; i++)
+    {
+        for (j = 0 ; j < list->col; j++)
+        {
+            if (aux == 0)
+                printf("%c ", list->matriz[i][j].element);
+            else
+                printf("%d ", list->matriz[i][j].put);
+        }
+        printf("\n");
+    }
+
+    printf("\n");
+    printf("\n");
+    printf("************** Finalizado *****************");
+    printf("\n");
+    printf("\n");
+}
+
+
+Matriz* createListMatriz (Matriz* list, int numberRow, int numberCol)
+{
+    list->row = numberRow;
+    list->col = numberCol;
+    
+    list->matriz = (Box**)malloc(sizeof(Box*)*numberRow); 
+    list->matrizInv = (Box**)malloc(sizeof(Box*)*numberRow); 
+
+    int i;
+    for (i = 0 ; i < numberRow ; i++)
+    {
+        list->matriz[i] = (Box*)malloc(sizeof(Box)*numberCol);
+        list->matrizInv[i] = (Box*)malloc(sizeof(Box)*numberCol); 
+    }
+    return list;
 }

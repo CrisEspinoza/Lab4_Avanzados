@@ -14,8 +14,8 @@ int main(int argc, char *argv[])
 {    
 	// Se declaran las variables que se van a utilizar
     int option,flag = 0;
-    List* listNodo;
-    listNodo = NULL; // Se inicializa la lista como nula
+    Matriz* list;
+    list = NULL; // Se inicializa la lista como nula
 
     if (argc == 3)
     {
@@ -40,12 +40,13 @@ int main(int argc, char *argv[])
                         {
                             //printf("Ingrese nombre del archivo a leer (Sin extension) \n");
                             //scanf("%s",nameEntrada); // Se carga el nombre del archivo
-                            listNodo = loadListNodo (argv[1]); // Se lee el archivo y se almacena en memoria el grafo
+                            list = loadMatriz (argv[1]); // Se lee el archivo y se almacena en memoria el grafo
                             //printf("sale");
-                            if (listNodo != NULL)
+                            printf("%c", list->matriz[0][3].element);
+                            if (list != NULL)
                             {
                                 flag = 1;
-                                //printListNodo(listNodo);
+                                printListMatriz(list, 0);
                                 break;
                             }
                             printf("Reinicie el programa, archivo no existente \n");
@@ -55,9 +56,9 @@ int main(int argc, char *argv[])
                         break;              
 
                 case 2: system("clear");
-                        if (listNodo != NULL && flag == 1)
+                        if (list != NULL && flag == 1)
                         {
-                            goloso(listNodo,argv[2]);
+                            dinamica(list);
                             flag = 2;
                             break;
                         }
@@ -65,7 +66,7 @@ int main(int argc, char *argv[])
                         break;     
 
                 case 3: system("clear");
-                        freeMemory(listNodo);
+                        freeMemory();
                         flag = 0 ;
                         break;
 
@@ -76,7 +77,7 @@ int main(int argc, char *argv[])
             }
 
         }while(option != 5);
-
+        
         return 0;
     }
     else
