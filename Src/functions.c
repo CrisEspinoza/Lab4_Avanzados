@@ -21,21 +21,25 @@ Matriz* dinamica( Matriz* list)
 
     if (list->row != 1)
     {
-        for (i = 1 ; i < list->row-1; i++)
+        for (i = 1 ; i < list->row; i++)
         {
             //printf("Cortando filas \n");
             put = 1 + auxDinamica(list->matriz, 0, (list->row - i), 0, list->col) + auxDinamica(list->matriz, (list->row - i), list->row, 0, list->col) ;
+            printf("Primera matriz: (Fila) inicio: %d - final: %d *****-***** (Columna) inicio: %d - final: %d ||||| %d x %d  \n",0, (list->row - i), 0, list->col, (list->row-i),list->col);
+            printf("Segunda matriz: (Fila) inicio: %d - final: %d *****-***** (Columna) inicio: %d - final: %d ||||| %d x %d  \n",(list->row - i), list->row, 0, list->col, list->row,list->col);
             //printf("\n");
             //printf("\n");
             //printf("Cantidad de cortes es : %d \n", put);
             //printf("\n");
             //printf("\n");
-            list->matriz[i+1][0].put = put;
+            list->matriz[list->row - i][0].put = put;
         }
     }
     else{
         //printf("No necesitas corte mediante filas \n ");
     }
+
+    //return 0;
 
     printf("\n");
     printf(" ****************************** ******************************************************************\n ");
@@ -48,16 +52,18 @@ Matriz* dinamica( Matriz* list)
     if (list->col != 1)
     {
         //printf("Entre aca: Numero de columnas %d \n", list->col);
-        for (i = 1 ; i < list->col-1; i++)
+        for (i = 1 ; i < list->col; i++)
         {
             //printf("Cortando columnas \n");
-            put = 1 + auxDinamica(list->matriz, 0, list->row, 0, (list->col - (i) ) )  + auxDinamica(list->matriz, 0 ,list->row, (list->col - (i )) , list->col) ;
+            put = 1 + auxDinamica(list->matriz, 0, list->row, 0, (list->col - i ) )  + auxDinamica(list->matriz, 0 ,list->row, (list->col - i ) , list->col) ;
+            printf("Primera matriz: (Fila) inicio: %d - final: %d *****-***** (Columna) inicio: %d - final: %d ||||| %d x %d  \n",0, list->row, 0, (list->col-i), list->row,(list->col-i) );
+            printf("Segunda matriz: (Fila) inicio: %d - final: %d *****-***** (Columna) inicio: %d - final: %d ||||| %d x %d  \n",0,list->row, (list->col -i), list->col, list->row,list->col);
             //printf("\n");    if ( row == 5 && col == 5 )
             //printf("\n");    {
             //printf("Canti        return 0;
             //printf("\n");    }
             //printf("\n");
-            list->matriz[0][i+1].put = put;
+            list->matriz[0][list->col - i].put = put;
         }
     }
     else{   
@@ -90,11 +96,6 @@ int auxDinamica(Box** matriz, int initialRow, int row , int initialCol, int col)
         printf("Entre aca 0 \n");
         return 0;
     }
-
-    if (row == 5 && col == 5)
-    {
-        return 0 ;
-    }
         
     else{
         //printf("\n");    
@@ -118,7 +119,7 @@ int auxDinamica(Box** matriz, int initialRow, int row , int initialCol, int col)
                 
                 printf("ROw: %d , Col : %d \n" , row,col);
                 printf("inicial row: %d , inicial col: %d \n" , initialRow, initialCol);
-                return 1 + auxDinamica(matriz, 0, (row - i), initialCol, col) + auxDinamica(matriz, (row - i), row, initialCol, col) ;
+                return 1 + auxDinamica(matriz, 0, (row - i), initialCol, col) + auxDinamica(matriz, (row - i), (row - initialRow), initialCol, col) ;
                 
             }
         }
@@ -149,7 +150,7 @@ int auxDinamica(Box** matriz, int initialRow, int row , int initialCol, int col)
                 printf("\n");
                 */
                 printf("ROw: %d , Col : %d " , (row-initialRow),(col-initialCol));
-                return 1 + auxDinamica(matriz, initialRow, row , 0, (col - i ))+ auxDinamica(matriz, initialRow ,row , (col - i ) , col) ;
+                return 1 + auxDinamica(matriz, initialRow, row , 0, (col - i ))+ auxDinamica(matriz, initialRow ,row , (col - i ) , (col - initialCol)) ;
                 
             }
         }
