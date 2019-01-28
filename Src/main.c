@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
         do
         {
             printf( "\n   1. Leer archivo");
-            printf( "\n   2. Realizar tranferencias de basuras");
+            printf( "\n   2. Buscar cantidad de cortes");
             printf( "\n   3. Reiniciar Programa (Liberar memoria) ");
             printf( "\n   4. Creditos" );
             printf( "\n   5. Salir" );
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
                             //scanf("%s",nameEntrada); // Se carga el nombre del archivo
                             list = loadMatriz (argv[1]); // Se lee el archivo y se almacena en memoria el grafo
                             //printf("sale");
-                            printf("%c", list->matriz[0][3].element);
+                            //printf("%c", list->matriz[0][3].element);
                             if (list != NULL)
                             {
                                 flag = 1;
@@ -58,7 +58,8 @@ int main(int argc, char *argv[])
                 case 2: system("clear");
                         if (list != NULL && flag == 1)
                         {
-                            dinamica(list);
+                            list = dinamica(list);
+                            saveTablero(list);
                             flag = 2;
                             break;
                         }
@@ -66,7 +67,7 @@ int main(int argc, char *argv[])
                         break;     
 
                 case 3: system("clear");
-                        freeMemory();
+                        freeMemory(list);
                         flag = 0 ;
                         break;
 

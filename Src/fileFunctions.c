@@ -62,3 +62,31 @@ Matriz* loadMatriz (char nombre[])
     return list; //Retornamo la variable matriz, con el tablero contenido, el cual se leyó desde el file ingresado
 
 }
+
+void saveTablero (Matriz* list)
+{   
+    FILE *txt;  // Incialzamos una variable de tipo FILE para poder trabajar con los archivos
+    txt = fopen("../Out/Salida.out", "wt");
+    int i , j, corte = list->matriz[0][1].put;
+ 
+    for (i = 1; i < list->row; i++)
+    {
+        if (corte > list->matriz[i][0].put)
+        {
+            corte = list->matriz[i][0].put;
+        }
+    }
+
+
+    for (i = 1; i < list->col; i++)
+    {
+        if (corte > list->matriz[0][i].put)
+        {
+            corte = list->matriz[0][i].put;
+        }
+    }
+
+    fprintf(txt,"Se necesitan %d cortes", corte);
+
+    fclose(txt); // Cerramos el archivo
+}

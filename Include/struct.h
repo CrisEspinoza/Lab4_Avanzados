@@ -26,7 +26,8 @@ Matriz* dinamica( Matriz* list);
 int checkMatriz(Box** matriz, int row , int col , int initialRow, int initialCol, char element);
 int auxDinamica(Box** matriz, int initialRow, int row , int initialCol, int col);
 void printListMatriz (Matriz* list, int aux);
-void freeMemory();
-void printCurrent();
+void freeMemory(Matriz* list);
+void printCurrent(Matriz* list);
+void saveTablero (Matriz* list);
 
 # endif

@@ -13,9 +13,12 @@ Entrada: Recibe la matriz que se utiliza actualmente.
 Procedimiento: Se encarga de ir imprimiendo cada uno de los caminos generados y su respectivo costo de viaje.
 Salida: -.
 */
-void printCurrent()
+void printCurrent(Matriz* list)
 {
     #ifdef DEBUG
+
+    // Vamos ir imprimiendo cada una de las matrices, para ir viendo los cortes que llevamos hasta el momento
+    printListMatriz(list,1);
 
     while(getchar() != '\n')
     {
@@ -31,9 +34,17 @@ sin necesidad que se tenga que volver a ejecutar.
 Salida: -.
 */
 
-void freeMemory()
+void freeMemory(Matriz* list)
 {
-
+    int i;
+    for (i = 0 ; i < list->row ; i++)
+    {
+        free(list->matriz[i]);
+        free(list->matrizInv[i]);
+    }
+    free(list->matriz);
+    free(list->matrizInv);
+    free(list);
 }
 
 /*
